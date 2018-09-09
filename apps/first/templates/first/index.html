@@ -1,0 +1,33 @@
+{% extends "./layout.html" %}
+{% block body %}
+    <div class="container">
+        {% if users %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Created_at</th>
+                    <th>Actions</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.f_name }}&nbsp{{ user.l_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.created_at }}</td>
+                        <td><a href="{% url 'main:show' user_id=user.id %}" class="button">Show</a></td>
+                        <td><a href="{% url 'main:edit' user_id=user.id %}" class="button">Edit</a></td>
+                        <td><a href="{% url 'main:delete' user_id=user.id %}" class="button">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <a href="{% url 'main:new' %}">Add a new user</a>
+        {% else %}
+            <h1>No User!!!</h1>
+            <a href="{% url 'main:new' %}">Add a new user</a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

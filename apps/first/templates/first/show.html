@@ -1,0 +1,18 @@
+{% extends "./layout.html" %}
+{% block body %}
+    <div class="container">
+        <h1>User {{ users.id }}</h1>
+        <table>
+            <tr><td>{{ users.f_name }}&nbsp{{ users.l_name }}</td></tr>
+            <tr><td>{{ users.email}}</td></tr>
+            <tr><td>{{ users.created_at }}</td></tr>
+            <tr>
+                <td><a href="{% url 'main:index'%}" class="button">Back</a>  <a href="{% url 'main:edit' user_id=users.id %}" class="button">Edit</a>  <a href="{% url 'main:delete' user_id=users.id %}" class="button">Delete</a></td>
+            </tr>
+        </table>
+        <form action="{% url 'main:edit' user_id=users.id %}" method="POST">
+            <input type="submit" value="Edit">
+        </form>
+    </div>
+{% endblock %}
+

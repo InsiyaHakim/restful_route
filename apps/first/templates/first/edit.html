@@ -1,0 +1,24 @@
+{% extends "./layout.html" %}
+{% block body %}
+    <div class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="{% url 'main:update' user_id=users.id %}" method="POST">
+            {% csrf_token %}
+            <label for="f_name">First Name</label>
+            <input type="text" name="f_name" value='{{ users.f_name }}'>
+            <label for="l_name">Last Name</label>
+            <input type="text" name="l_name" value='{{ users.l_name }}'>
+            <label for="email">Email</label>
+            <input type="text" name="email" value='{{ users.email }}'>
+            <input type="submit" value="Register">
+        </form>
+        <a href="{% url 'main:index' %}" class="button">Go Back</a>
+    </div>
+{% endblock %}
+

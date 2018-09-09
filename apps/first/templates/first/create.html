@@ -1,0 +1,27 @@
+{% extends "./layout.html" %}
+{% block body %}
+    <div class="container">
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h1>Add a new User</h1>
+        <form action="{% url 'main:create' %}" method="POST">
+            {% csrf_token %}
+            <label for="f_name">First Name</label>
+            <input type="text" name="f_name">
+            <label for="l_name">Last Name</label>
+            <input type="text" name="l_name">
+            <label for="email">Email</label>
+            <input type="text" name="email">
+            <input type="submit" value="Register">
+        </form>
+        <a href="{% url 'main:index' %}">Go Back / Show User(s)</a>
+    </div>
+{% endblock %}
+
